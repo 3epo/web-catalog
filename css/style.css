@@ -3,9 +3,17 @@
     src: url(../fonts/Glass_TTY_VT220.ttf) format("truetype");
   }
 
-body {
+body, pre {
     color: #e5b800;
     background-color: #000;
     font-family: GlassTTYVT220;
     font-size: 20px;
+}
+
+a:link, a:visited {
+    color: #e5b800;
+}
+
+a:hover, a:active {
+    color: #18d818;
 }
