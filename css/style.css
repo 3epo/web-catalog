@@ -1,0 +1,11 @@
+@font-face {
+    font-family: GlassTTYVT220;
+    src: url(../fonts/Glass_TTY_VT220.ttf) format("truetype");
+  }
+
+body {
+    color: #e5b800;
+    background-color: #000;
+    font-family: GlassTTYVT220;
+    font-size: 20px;
+}
