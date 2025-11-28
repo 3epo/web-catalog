@@ -726,7 +726,7 @@ install_additional_packages() {
         # https://download.rockylinux.org/pub/rocky/9/AppStream/x86_64/os/Packages/p/perl-DBD-MySQL-4.050-13.el9.x86_64.rpm
         PACKAGES_LINK="https://download.rockylinux.org/pub/rocky/9/AppStream/x86_64/os/Packages/"
         PACKAGE_CONNECTOR_C="mariadb-connector-c-3.2.6-1.el9_0.x86_64.rpm"
-        PACKAGE_PERL_DBD_MYSQL="perl-DBD-MySQL-4.053-1.el9.x86_64.rpm"
+        PACKAGE_PERL_DBD_MYSQL="perl-DBD-MySQL-4.050-13.el9.x86_64.rpm"
     fi
     if [[ ${OS} == 'AlmaLinux' ]];
     then
@@ -734,7 +734,7 @@ install_additional_packages() {
         # https://repo.almalinux.org/almalinux/9/AppStream/x86_64/os/Packages/perl-DBD-MySQL-4.050-13.el9.x86_64.rpm
         PACKAGES_LINK="https://repo.almalinux.org/almalinux/9/AppStream/x86_64/os/Packages/"
         PACKAGE_CONNECTOR_C="mariadb-connector-c-3.2.6-1.el9_0.x86_64.rpm"
-        PACKAGE_PERL_DBD_MYSQL="perl-DBD-MySQL-4.053-1.el9.x86_64.rpm"
+        PACKAGE_PERL_DBD_MYSQL="perl-DBD-MySQL-4.050-13.el9.x86_64.rpm"
     fi
     if [[ ${OS} == 'Oracle Linux' ]];
     then
@@ -742,7 +742,7 @@ install_additional_packages() {
         # https://yum.oracle.com/repo/OracleLinux/OL9/appstream/x86_64/getPackage/perl-DBD-MySQL-4.050-13.el9.x86_64.rpm
         PACKAGES_LINK="https://yum.oracle.com/repo/OracleLinux/OL9/appstream/x86_64/getPackage/"
         PACKAGE_CONNECTOR_C="mariadb-connector-c-3.2.6-1.el9_0.x86_64.rpm"
-        PACKAGE_PERL_DBD_MYSQL="perl-DBD-MySQL-4.053-1.el9.x86_64.rpm"
+        PACKAGE_PERL_DBD_MYSQL="perl-DBD-MySQL-4.050-13.el9.x86_64.rpm"
     fi
     if [[ ${OS} == 'CentOS Stream' ]];
     then
@@ -750,7 +750,7 @@ install_additional_packages() {
         # https://mirror.stream.centos.org/9-stream/AppStream/x86_64/os/Packages/perl-DBD-MySQL-4.050-13.el9.x86_64.rpm
         PACKAGES_LINK="https://mirror.stream.centos.org/9-stream/AppStream/x86_64/os/Packages/"
         PACKAGE_CONNECTOR_C="mariadb-connector-c-3.2.6-1.el9.x86_64.rpm"
-        PACKAGE_PERL_DBD_MYSQL="perl-DBD-MySQL-4.053-1.el9.x86_64.rpm"
+        PACKAGE_PERL_DBD_MYSQL="perl-DBD-MySQL-4.050-13.el9.x86_64.rpm"
     fi
     # url
     if [[ ${OS} == 'Rocky Linux' ]];
@@ -763,9 +763,9 @@ install_additional_packages() {
         LINK_CONNECTOR_C="${PACKAGES_LINK}${PACKAGE_CONNECTOR_C}"
         LINK_PERL_DBD_MYSQL="${PACKAGES_LINK}${PACKAGE_PERL_DBD_MYSQL}"
     fi
-    cd /tmp >> ${LOGS_FILE} 2>&1
-    wget ${LINK_CONNECTOR_C} >> ${LOGS_FILE} 2>&1 || print_e "error: ${LINK_CONNECTOR_C}"
-    wget ${LINK_PERL_DBD_MYSQL} >> ${LOGS_FILE} 2>&1 || print_e "error: ${LINK_PERL_DBD_MYSQL}"
+    cd /tmp >> ${LOGS_FILE} 2>&1 || print_e "rpm enter to temp directory"
+    wget ${LINK_CONNECTOR_C} >> ${LOGS_FILE} 2>&1 || print_e "downloaded connector"
+    wget ${LINK_PERL_DBD_MYSQL} >> ${LOGS_FILE} 2>&1 || print_e "downloaded perl"
     rpm -Uvh ${PACKAGE_CONNECTOR_C} ${PACKAGE_PERL_DBD_MYSQL} >> ${LOGS_FILE} 2>&1  || print_e "rpm error"
     rm -f /tmp/${PACKAGE_CONNECTOR_C} >> ${LOGS_FILE} 2>&1
     rm -f /tmp/${PACKAGE_PERL_DBD_MYSQL} >> ${LOGS_FILE} 2>&1
