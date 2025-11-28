@@ -763,12 +763,12 @@ install_additional_packages() {
         LINK_CONNECTOR_C="${PACKAGES_LINK}${PACKAGE_CONNECTOR_C}"
         LINK_PERL_DBD_MYSQL="${PACKAGES_LINK}${PACKAGE_PERL_DBD_MYSQL}"
     fi
-    cd /tmp >> ${LOGS_FILE} 2>&1 || print_e "rpm enter to temp directory"
-    wget ${LINK_CONNECTOR_C} >> ${LOGS_FILE} 2>&1 || print_e "downloaded connector"
-    wget ${LINK_PERL_DBD_MYSQL} >> ${LOGS_FILE} 2>&1 || print_e "downloaded perl"
-    rpm -Uvh ${PACKAGE_CONNECTOR_C} ${PACKAGE_PERL_DBD_MYSQL} >> ${LOGS_FILE} 2>&1  || print_e "rpm error"
-    rm -f /tmp/${PACKAGE_CONNECTOR_C} >> ${LOGS_FILE} 2>&1
-    rm -f /tmp/${PACKAGE_PERL_DBD_MYSQL} >> ${LOGS_FILE} 2>&1
+    #cd /tmp >> ${LOGS_FILE} 2>&1 || print_e "rpm enter to temp directory"
+    #wget ${LINK_CONNECTOR_C} >> ${LOGS_FILE} 2>&1 || print_e "downloaded connector"
+    #wget ${LINK_PERL_DBD_MYSQL} >> ${LOGS_FILE} 2>&1 || print_e "downloaded perl"
+    #rpm -Uvh ${PACKAGE_CONNECTOR_C} ${PACKAGE_PERL_DBD_MYSQL} >> ${LOGS_FILE} 2>&1  || print_e "rpm error"
+    #rm -f /tmp/${PACKAGE_CONNECTOR_C} >> ${LOGS_FILE} 2>&1
+    #rm -f /tmp/${PACKAGE_PERL_DBD_MYSQL} >> ${LOGS_FILE} 2>&1
 #
 }
 
