@@ -939,7 +939,7 @@ configure_bitrix_repo() {
 dnf_update() {
 #
     print "$MBE0042" 1
-    dnf -y update >> ${LOGS_FILE} 2>&1 || print_e "$MBE0043"
+    #dnf -y update >> ${LOGS_FILE} 2>&1 || print_e "$MBE0043"
 #
 }
 
