@@ -524,7 +524,6 @@ disable_repos() {
     dnf module disable maven:3.8 -y >> ${LOGS_FILE} 2>&1
     dnf module disable nginx:1.22 -y >> ${LOGS_FILE} 2>&1
     dnf module disable nginx:1.24 -y >> ${LOGS_FILE} 2>&1
-    dnf module disable nodejs:16 -y >> ${LOGS_FILE} 2>&1  # Добавлено: отключить системный Node.js 16 для избежания конфликтов
     dnf module disable nodejs:18 -y >> ${LOGS_FILE} 2>&1
     dnf module disable nodejs:20 -y >> ${LOGS_FILE} 2>&1
     dnf module disable php:8.1 -y >> ${LOGS_FILE} 2>&1
@@ -621,7 +620,7 @@ install_percona() {
 
 configure_nodejs() {
 #
-    NODEJS_VERSION=20  # Изменено: с 16 на 20 для установки Node.js 20.x из NodeSource
+    NODEJS_VERSION=20
     NODEJS=$(rpm -qa | grep -c 'nodejs')
     if [[ ${NODEJS} -gt 0 ]];
     then
@@ -638,14 +637,13 @@ configure_nodejs() {
         APPSTREAM_NAME='ol9_appstream'
     fi
 
-    # disable appstream to install npm from node repo (и для избежания конфликтов с системным Node.js)
+    # disable appstream to install npm from node repo
     dnf config-manager --set-disabled ${APPSTREAM_NAME}
 
     LINK="https://rpm.nodesource.com/setup_${NODEJS_VERSION}.x"
 
     curl --silent --location "${LINK}" | bash - > /dev/null 2>&1
-    dnf clean all  # Добавлено: очистка кэша для обновления после добавления NodeSource
-    dnf -y install nodejs npm --nobest >> ${LOGS_FILE} 2>&1 || print_e "$MBE0079 nodejs"  # Добавлено --nobest для разрешения конфликтов
+    dnf -y install nodejs npm >> ${LOGS_FILE} 2>&1 || print_e "$MBE0079 nodejs"
 
     # enable appstream back
     dnf config-manager --set-enabled ${APPSTREAM_NAME}
@@ -768,7 +766,7 @@ install_additional_packages() {
     cd /tmp >> ${LOGS_FILE} 2>&1
     wget ${LINK_CONNECTOR_C} >> ${LOGS_FILE} 2>&1 || print_e "error: ${LINK_CONNECTOR_C}"
     wget ${LINK_PERL_DBD_MYSQL} >> ${LOGS_FILE} 2>&1 || print_e "error: ${LINK_PERL_DBD_MYSQL}"
-    rpm -Uvh ${PACKAGE_CONNECTOR_C} ${PACKAGE_PERL_DBD_MYSQL} >> ${LOGS_FILE} 2>&1  || print_e "rpm error"
+    #rpm -Uvh ${PACKAGE_CONNECTOR_C} ${PACKAGE_PERL_DBD_MYSQL} >> ${LOGS_FILE} 2>&1  || print_e "rpm error"
     rm -f /tmp/${PACKAGE_CONNECTOR_C} >> ${LOGS_FILE} 2>&1
     rm -f /tmp/${PACKAGE_PERL_DBD_MYSQL} >> ${LOGS_FILE} 2>&1
 #
@@ -1324,7 +1322,7 @@ configure_rsyslog_and_logrotate
 configure_general
 pre_php
 configure_percona
-configure_nodejs  # Теперь устанавливает Node.js 20.x с фиксами конфликтов
+configure_nodejs
 configure_redis
 prepare_percona_install
 configure_bitrix_repo
