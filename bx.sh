@@ -726,7 +726,7 @@ install_additional_packages() {
         # https://download.rockylinux.org/pub/rocky/9/AppStream/x86_64/os/Packages/p/perl-DBD-MySQL-4.050-13.el9.x86_64.rpm
         PACKAGES_LINK="https://download.rockylinux.org/pub/rocky/9/AppStream/x86_64/os/Packages/"
         PACKAGE_CONNECTOR_C="mariadb-connector-c-3.2.6-1.el9_0.x86_64.rpm"
-        PACKAGE_PERL_DBD_MYSQL="perl-DBD-MySQL-4.053-1.el9.x86_64.rpm"
+        PACKAGE_PERL_DBD_MYSQL="perl-DBD-MySQL-4.050-13.el9.x86_64.rpm"
     fi
     if [[ ${OS} == 'AlmaLinux' ]];
     then
@@ -766,7 +766,7 @@ install_additional_packages() {
     cd /tmp >> ${LOGS_FILE} 2>&1
     wget ${LINK_CONNECTOR_C} >> ${LOGS_FILE} 2>&1 || print_e "error: ${LINK_CONNECTOR_C}"
     wget ${LINK_PERL_DBD_MYSQL} >> ${LOGS_FILE} 2>&1 || print_e "error: ${LINK_PERL_DBD_MYSQL}"
-    #rpm -Uvh ${PACKAGE_CONNECTOR_C} ${PACKAGE_PERL_DBD_MYSQL} >> ${LOGS_FILE} 2>&1  || print_e "rpm error"
+    rpm -Uvh ${PACKAGE_CONNECTOR_C} ${PACKAGE_PERL_DBD_MYSQL} >> ${LOGS_FILE} 2>&1  || print_e "rpm error"
     rm -f /tmp/${PACKAGE_CONNECTOR_C} >> ${LOGS_FILE} 2>&1
     rm -f /tmp/${PACKAGE_PERL_DBD_MYSQL} >> ${LOGS_FILE} 2>&1
 #
