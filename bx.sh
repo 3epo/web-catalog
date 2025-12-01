@@ -643,7 +643,7 @@ configure_nodejs() {
     LINK="https://rpm.nodesource.com/setup_${NODEJS_VERSION}.x"
 
     curl --silent --location "${LINK}" | bash - > /dev/null 2>&1
-    dnf -y install nodejs npm >> ${LOGS_FILE} 2>&1 || print_e "$MBE0079 nodejs"
+    dnf install -y nodejs npm --nobest >> ${LOGS_FILE} 2>&1 || print_e "$MBE0079 nodejs"
 
     # enable appstream back
     dnf config-manager --set-enabled ${APPSTREAM_NAME}
